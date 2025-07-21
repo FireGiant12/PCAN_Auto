@@ -37,8 +37,8 @@ def send_message(bus, arbitration_id):
     except can.CanError as e:
         print(f"Error sending message: {e}")
 
-def main():
-    """Main function to parse arguments and execute commands."""
+def main_cli():
+    """Main function to parse arguments and execute commands for the CLI."""
     if len(sys.argv) < 3 or sys.argv[1] != 'send':
         print("Usage: python can_tool.py send <id>")
         print("  <id>: The arbitration ID in hexadecimal (e.g., 0x123) or decimal.")
@@ -62,4 +62,6 @@ def main():
             bus.shutdown()
 
 if __name__ == "__main__":
-    main()
+    # This allows the script to be run as a command-line tool.
+    # The GUI is the primary entry point.
+    main_cli()
