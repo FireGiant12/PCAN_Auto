@@ -1,7 +1,8 @@
-
 import sys
 import platform
 import can
+import tkinter as tk
+from tkinter import messagebox
 
 # --- Configuration ---
 CHANNEL = 'Cummins_net_USB1'
@@ -61,5 +62,43 @@ def main():
         if bus:
             bus.shutdown()
 
+def gui_send():
+    """Handler for GUI send button."""
+    arb_id_str = arb_id_entry.get()
+    try:
+        arbitration_id = int(arb_id_str, 0)
+    except ValueError:
+        messagebox.showerror("Invalid ID", "Please enter a valid hex (0x...) or decimal arbitration ID.")
+        return
+
+    bus = None
+    try:
+        bus = get_bus()
+        send_message(bus, arbitration_id)
+        messagebox.showinfo("Success", f"Message sent with ID: {hex(arbitration_id)}")
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+    finally:
+        if bus:
+            bus.shutdown()
+
+def launch_gui():
+    global arb_id_entry
+    root = tk.Tk()
+    root.title("CAN Tool GUI")
+
+    tk.Label(root, text="Arbitration ID (hex or dec):").grid(row=0, column=0, padx=10, pady=10)
+    arb_id_entry = tk.Entry(root)
+    arb_id_entry.grid(row=0, column=1, padx=10, pady=10)
+
+    send_btn = tk.Button(root, text="Send", command=gui_send)
+    send_btn.grid(row=1, column=0, columnspan=2, pady=10)
+
+    root.mainloop()
+
 if __name__ == "__main__":
-    main()
+    # Launch GUI by default if no arguments or if 'gui' is specified
+    if len(sys.argv) == 1 or (len(sys.argv) > 1 and sys.argv[1] == "gui"):
+        launch_gui()
+    else:
+        main()
