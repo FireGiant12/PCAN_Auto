@@ -1,0 +1,21 @@
+{
+  "channels": [
+    {
+      "channel": "PCAN_USBBUS1",
+      "bitrate": 500000,
+      "fd": false,
+      "listen_only": false
+    },
+    {
+      "channel": "PCAN_USBBUS2",
+      "bitrate": 1000000,
+      "fd": true,
+      "data_bitrate": 5000000,
+      "listen_only": false
+    }
+  ],
+  "log_level": "INFO",
+  "log_file": "pcan_auto.log",
+  "enable_trace": true,
+  "trace_file": "trace.csv"
+}

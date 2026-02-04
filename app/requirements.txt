@@ -1,0 +1,17 @@
+python-can[pcan]>=4.0.0
+PySide6>=6.5.0
+cantools>=4.0.0
+numpy>=1.21.0
+matplotlib>=3.5.0
+
+# Development and testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-mock>=3.10.0
+pylint>=2.15.0
+flake8>=5.0.0
+
+# Optional extras
+# python-j1939>=0.2.0
+# udsoncan>=1.5.0
+

@@ -1,0 +1,3 @@
+# This file was auto-generated to match the new app structure.
+# See app/requirements.txt for the full list of dependencies.
+-r app/requirements.txt
